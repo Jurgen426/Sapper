@@ -1,0 +1,56 @@
+﻿<Window x:Class="Sapper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sapper"
+        mc:Ignorable="d"
+        Title="Sapper" Height="600" Width="600">
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}">
+            <Setter Property="Background" Value="Orange" />
+            <Setter Property="BorderBrush" Value="Crimson" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Game">
+                <MenuItem Header ="New Game" ></MenuItem>
+                <MenuItem Header="Statistic"></MenuItem>
+                <MenuItem Header="Settings"></MenuItem>
+                <MenuItem Header="Skin"></MenuItem>
+                <MenuItem Header="Exit" Click="MenuItemExitClick"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Help"></MenuItem>
+        </Menu>
+
+        <Grid DockPanel.Dock="Bottom"  ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0"  Content="Stopwatch" BorderThickness="1" BorderBrush="Black"></Label>
+            <Label x:Name="StopWatch" Grid.Row="0" Grid.Column="1"  Content= "00" BorderThickness="1" BorderBrush="Black"></Label>
+            
+            <Label Grid.Row="0" Grid.Column="2"  Content="Mines left" BorderThickness="1" BorderBrush="Black"></Label>
+            <Label x:Name="MinesLeft" Grid.Row="0" Grid.Column="3"  Content="00" BorderThickness="1" BorderBrush="Black"></Label>
+        </Grid>
+
+        <UniformGrid  x:Name="Field" Rows="{Binding Path = YSize}" Columns="{Binding Path = XSize}"> </UniformGrid>
+    </DockPanel>
+    
+    
+    
+</Window>

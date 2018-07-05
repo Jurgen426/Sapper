@@ -15,89 +15,13 @@ using System.Windows.Threading;
 
 namespace Sapper
 {
-
-    //класс ячейки
-    public class Cell
-    {
-        public int  Cx { get; set; }
-        public int Cy { get; set; }
-        public bool Mined{ get; set; }
-        public bool IsOpened { get; set; }
-        public bool IsFlagged { get; set; }
-        public int MinesNear { get; set; }
-        public Cell()
-        {
-            Cx = 0;
-            Cy = 0;
-            Mined = false;
-            IsOpened = false;
-            IsFlagged = false;
-            MinesNear = 0;
-        }
-    }
-
-    //класс поля
-    public class SapperField
-    {
-       
-        public int XSize { get; private set; }
-        public int YSize { get; private set; }
-        public List<Cell> Cells { get; set; }
-
-        public int MineCount { get; set; }
-        public int FlaggedCount { get; set; }
-        public int OpenedCount { get; set; }
-
-        public SapperField()
-        {
-            XSize = 9;
-            YSize = 9;
-            MineCount = 10;
-            OpenedCount = 0;
-            Cells = new List<Cell>();
-        }
-
-        public int GetMineCount()
-        {
-            return MineCount;
-        }
-
-        public Cell GetCellByCoord(int x, int y)
-        {
-            if ((x>=0 && x <= XSize - 1) && (y>=0 && y <= YSize - 1))
-            {
-                int index = y * YSize + x;
-                return Cells[index];
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public void SetCellByCoord(Cell cell, int x, int y)
-        {
-            int index = y * YSize + x;
-            //если такой индекс уже есть - заменить
-            if (Cells.Count > index)
-            {
-                Cells[index] = cell;
-            }
-            //иначе - добавить в конец листа
-            else 
-            {
-                Cells.Add(cell);
-            } 
-        }
-    }
-
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         
-        public SapperField sapperField = new SapperField();
+        public Field sapperField = new Field();
         DispatcherTimer timer;
 
         public int counter = 0;
@@ -145,7 +69,6 @@ namespace Sapper
                     lbl.BorderThickness = new Thickness(1);
                     lbl.BorderBrush = Brushes.Black;
 
-
                     lbl.MouseLeftButtonUp += OnLeftClick;
                     lbl.MouseRightButtonUp += OnRightClick;
                     lbl.MouseMove += OnMyMouseMove;
@@ -164,7 +87,6 @@ namespace Sapper
                     Field.Children.Add(lbl);
 
                 }
-
             }
             MinesLeft.Content = sapperField.MineCount;
             SetMines();
@@ -209,13 +131,11 @@ namespace Sapper
                     {
                         if (sapperField.Cells[c].Mined)
                         {
-                            tmp.Content = sapperField.Cells[c].Mined.ToString();
-                           
+                            tmp.Content = sapperField.Cells[c].Mined.ToString(); 
                         }
                     }
                 }
-            }
-            
+            }   
         }
 
 
